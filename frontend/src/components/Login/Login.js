@@ -1,12 +1,15 @@
 import { React, Component } from "react";
-import { TextField, Grid, Button, Card } from "@mui/material";
+import { TextField, Grid, Button } from "@mui/material";
 import { styles } from "./loginCss.js";
+import { AppContext } from "../../Context/AppContext.js";
 
 class Login extends Component {
   state = {
     userName: "",
     password: "",
   };
+
+  static contextType = AppContext;
 
   constructor(props) {
     super(props);
@@ -24,6 +27,24 @@ class Login extends Component {
       default:
         this.setState({ userName: "", password: "" });
     }
+  };
+
+  handleLogin = () => {
+    var authObj = {
+      username: this.state.userName,
+      password: this.state.password,
+    };
+
+    this.context.login(authObj, (callback) => {
+      if (callback) {
+        this.props.history.push("/home");
+      }
+    });
+    // if (this.state.userName === "admin" && this.state.password === "admin") {
+    //   alert("Login Success!");
+    // } else {
+    //   alert("Login Failed!");
+    // }
   };
 
   render() {
@@ -69,7 +90,9 @@ class Login extends Component {
               <Grid container spacing={2}>
                 <Grid item xs={4}></Grid>
                 <Grid item xs={4} style={styles.centeredFields}>
-                  <Button variant="contained">Login</Button>
+                  <Button variant="contained" onClick={this.handleLogin}>
+                    Login
+                  </Button>
                 </Grid>
                 <Grid item xs={4}></Grid>
               </Grid>
