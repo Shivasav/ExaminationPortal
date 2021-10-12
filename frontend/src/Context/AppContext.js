@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 export const AppContext = React.createContext();
 
@@ -13,13 +14,17 @@ export class AppProvider extends React.Component {
         value={{
           isAuthenticated: this.state.isAuthenticated,
           login: (authObj, callback) => {
-            if (authObj.username === "admin" && authObj.password === "admin") {
-              this.setState({ isAuthenticated: true }, () => {
-                callback(true);
+            axios
+              .post("http://localhost:5000/api/login/verifyLogin", authObj)
+              .then((resp) => {
+                if (resp.data.error) {
+                  alert("Invalid credentials!");
+                } else {
+                  this.setState({ isAuthenticated: true }, () => {
+                    callback(true);
+                  });
+                }
               });
-            } else {
-              alert("Invalid credentials!");
-            }
           },
         }}
       >

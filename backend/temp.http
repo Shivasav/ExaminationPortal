@@ -1,0 +1,13 @@
+GET http://localhost:5000
+
+###
+GET http://localhost:5000/api/login/getLoginDetails
+
+###
+POST http://localhost:5000/api/login/verifyLogin
+Content-Type: application/json
+
+{
+    "username": "brij",
+    "password": "brij"
+}
