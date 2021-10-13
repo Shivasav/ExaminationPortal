@@ -18,7 +18,7 @@ export class AppProvider extends React.Component {
               .post("http://localhost:5000/api/login/verifyLogin", authObj)
               .then((resp) => {
                 if (resp.data.error) {
-                  alert("Invalid credentials!");
+                  callback(false);
                 } else {
                   this.setState({ isAuthenticated: true }, () => {
                     callback(true);

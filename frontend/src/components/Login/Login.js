@@ -1,12 +1,29 @@
 import { React, Component } from "react";
-import { TextField, Grid, Button } from "@mui/material";
+import {
+  TextField,
+  Grid,
+  Button,
+  Box,
+  AppBar,
+  Toolbar,
+  Typography,
+  Modal,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
 import { styles } from "./loginCss.js";
 import { AppContext } from "../../Context/AppContext.js";
+import Footer from "../Footer/Footer.js";
+import LoginHome from "../LoginHome/LoginHome.js";
 
 class Login extends Component {
   state = {
     userName: "",
     password: "",
+    open: false,
+    showAlert: false,
   };
 
   static contextType = AppContext;
@@ -38,75 +55,101 @@ class Login extends Component {
     this.context.login(authObj, (callback) => {
       if (callback) {
         this.props.history.push("/home");
+      } else {
+        this.setState({ showAlert: true });
       }
     });
-    // if (this.state.userName === "admin" && this.state.password === "admin") {
-    //   alert("Login Success!");
-    // } else {
-    //   alert("Login Failed!");
-    // }
+  };
+
+  handleModal = () => {
+    this.setState({ open: !this.state.open });
   };
 
   render() {
     return (
       <>
-        <Grid container spacing={2}>
-          <Grid item xs={4}></Grid>
-          <Grid item xs={4}>
-            <div
-              style={{
-                width: 500,
-                border: "1px solid grey",
-                margin: 10,
-                padding: 10,
-                boxShadow: "2px 2px grey",
-              }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={4} style={styles.centeredFields}>
-                  <TextField
-                    id="outlined-name"
-                    label="Username"
-                    value={this.state.userName}
-                    onChange={this.handleChange}
-                  />
-                </Grid>
-                <Grid item xs={4}></Grid>
-              </Grid>
-              <Grid container spacing={2}>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={4} style={styles.centeredFields}>
-                  <TextField
-                    id="outlined-password"
-                    type="password"
-                    label="Password"
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                  />
-                </Grid>
-                <Grid item xs={4}></Grid>
-              </Grid>
-              <Grid container spacing={2}>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={4} style={styles.centeredFields}>
-                  <Button variant="contained" onClick={this.handleLogin}>
-                    Login
-                  </Button>
-                </Grid>
-                <Grid item xs={4}></Grid>
-              </Grid>
-            </div>
-          </Grid>
-          <Grid item xs={4}></Grid>
-        </Grid>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              ></IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                EXAMine
+              </Typography>
+              <Button color="inherit" onClick={this.handleModal}>
+                Login
+              </Button>
+            </Toolbar>
+          </AppBar>
+        </Box>
 
-        <div>
-          <a href="https://www.facebook.com/shivasav.bhasin/">Facebook</a>
-          <br></br>
-          <a href="https://twitter.com/shivasavbhasin">Twitter</a>
-          <p>© 2021 SG Solutions</p>
-        </div>
+        <Modal
+          open={this.state.open}
+          onClose={this.handleModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={styles.modal}>
+            <Grid container spacing={2}>
+              <Typography variant="h4" style={{ width: "100%" }}>
+                Sign In
+              </Typography>
+              {this.state.showAlert && (
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    this.setState({ showAlert: false });
+                  }}
+                  style={{ width: "100%" }}
+                >
+                  <AlertTitle>Sign In Failed!</AlertTitle>
+                  Please check your credentials!
+                </Alert>
+              )}
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-name"
+                  label="Username"
+                  value={this.state.userName}
+                  onChange={this.handleChange}
+                  style={styles.centeredFields}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-password"
+                  type="password"
+                  label="Password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  style={styles.centeredFields}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  onClick={this.handleLogin}
+                  style={styles.centeredFields}
+                >
+                  Login
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Modal>
+
+        <LoginHome />
+
+        <Footer />
       </>
     );
   }
