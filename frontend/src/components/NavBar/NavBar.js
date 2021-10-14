@@ -19,6 +19,14 @@ import { Avatar } from "@mui/material";
 import { AppContext } from "../../Context/AppContext";
 import CreateExam from "../CreateExam/CreateExam";
 import Home from "../Home/Home";
+import AddQuestionSet from "../addQuestionSet/AddQuestionSet";
+import AddSubject from "../AddSubject/AddSubject";
+import InviteUser from "../InviteUser/InviteUser";
+import ViewResults from "../ViewResults/ViewResults";
+import ContactUs from "../ContactUs/ContactUs";
+import AboutUs from "../AboutUs/AboutUs";
+
+
 
 const drawerWidth = 240;
 
@@ -167,6 +175,13 @@ function NavBar(props) {
         <Toolbar />
         {view === "Create Exam" && <CreateExam />}
         {view === "Home" && <Home />}
+        {view === "Add Question Set" && <AddQuestionSet />}
+        {view === "Add Subjects" && <AddSubject />}
+        {view === "Invite Users" && <InviteUser />}
+        {view === "View Exam Results" && <ViewResults />}
+        {view === "Contact Us" && <ContactUs />}
+        {view === "About" && <AboutUs />}
+        
       </Box>
     </Box>
   );
