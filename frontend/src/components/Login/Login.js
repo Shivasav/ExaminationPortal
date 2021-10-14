@@ -10,6 +10,7 @@ import {
   Modal,
   Alert,
   AlertTitle,
+  Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
@@ -99,6 +100,7 @@ class Login extends Component {
               <Typography variant="h4" style={{ width: "100%" }}>
                 Sign In
               </Typography>
+              <Divider />
               {this.state.showAlert && (
                 <Alert
                   severity="error"

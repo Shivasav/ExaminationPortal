@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   var password = req.body.password;
 
   connection.query(
-    "select username, role from Login where username='" +
+    "select username, role, Name from Login where username='" +
       username +
       "' and password='" +
       password +

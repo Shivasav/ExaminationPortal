@@ -4,13 +4,14 @@ import Login from "./components/Login/Login";
 import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import ProtectedRoute from "./Context/ProtectedRoute";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <div className="App">
       <Switch>
         <Route exact path="/" component={Login} />
-        <ProtectedRoute path="/home" component={Home} />
+        <ProtectedRoute path="/home" component={NavBar} />
       </Switch>
       {/* <Login /> */}
     </div>
