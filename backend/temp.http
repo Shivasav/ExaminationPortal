@@ -11,3 +11,6 @@ Content-Type: application/json
     "username": "brij",
     "password": "brij"
 }
+
+###
+GET http://localhost:5000/api/admin/getCourseDetails

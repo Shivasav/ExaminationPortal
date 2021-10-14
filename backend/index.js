@@ -20,6 +20,12 @@ app.get("/api/login/:action", cors(), loginGet.get);
 var loginPost = require("./src/Login/login.post.js");
 app.post("/api/login/:action", cors(), loginPost.post);
 
+const adminGet = require("./src/Admin/admin.get.js");
+app.get("/api/admin/:action", cors(), adminGet.get);
+
+var adminPost = require("./src/Admin/admin.post.js");
+app.post("/api/admin/:action", cors(), adminPost.post);
+
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",

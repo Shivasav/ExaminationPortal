@@ -12,7 +12,6 @@ import {
   AlertTitle,
   Divider,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { styles } from "./loginCss.js";
 import { AppContext } from "../../Context/AppContext.js";

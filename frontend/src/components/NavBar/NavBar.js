@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,23 +14,20 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Avatar } from "@mui/material";
-import { AppContext } from "../../Context/AppContext";
+// import { AppContext } from "../../Context/AppContext";
 import CreateExam from "../CreateExam/CreateExam";
 import Home from "../Home/Home";
-import AddQuestionSet from "../addQuestionSet/AddQuestionSet";
+import AddQuestionSet from "../AddQuestionSet/AddQuestionSet";
 import AddSubject from "../AddSubject/AddSubject";
 import InviteUser from "../InviteUser/InviteUser";
 import ViewResults from "../ViewResults/ViewResults";
 import ContactUs from "../ContactUs/ContactUs";
 import AboutUs from "../AboutUs/AboutUs";
 
-
-
 const drawerWidth = 240;
 
 function NavBar(props) {
-  const context = React.useContext(AppContext);
+  //   const context = React.useContext(AppContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [view, setView] = React.useState("Home");
@@ -40,34 +36,34 @@ function NavBar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  function stringToColor(string) {
-    let hash = 0;
-    let i;
+  //   function stringToColor(string) {
+  //     let hash = 0;
+  //     let i;
 
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
+  //     /* eslint-disable no-bitwise */
+  //     for (i = 0; i < string.length; i += 1) {
+  //       hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  //     }
 
-    let color = "#";
+  //     let color = "#";
 
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.substr(-2);
-    }
-    /* eslint-enable no-bitwise */
+  //     for (i = 0; i < 3; i += 1) {
+  //       const value = (hash >> (i * 8)) & 0xff;
+  //       color += `00${value.toString(16)}`.substr(-2);
+  //     }
+  //     /* eslint-enable no-bitwise */
 
-    return color;
-  }
+  //     return color;
+  //   }
 
-  function stringAvatar(name) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
-    };
-  }
+  //   function stringAvatar(name) {
+  //     return {
+  //       sx: {
+  //         bgcolor: stringToColor(name),
+  //       },
+  //       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  //     };
+  //   }
 
   const drawer = (
     <div>
@@ -181,7 +177,6 @@ function NavBar(props) {
         {view === "View Exam Results" && <ViewResults />}
         {view === "Contact Us" && <ContactUs />}
         {view === "About" && <AboutUs />}
-        
       </Box>
     </Box>
   );
