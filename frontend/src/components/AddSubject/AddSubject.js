@@ -5,6 +5,8 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  TextField,
+  Button,
 } from "@mui/material";
 import axios from "axios";
 import { React, Component } from "react";
@@ -60,7 +62,7 @@ export default class AddSubject extends Component {
               onChange={this.handleCourseDropdownChange}
               input={<OutlinedInput label="Course" />}
               // MenuProps={MenuProps}
-              style={{ width: 250 }}
+              style={{ width: 250, margin: 5 }}
             >
               {this.state.courses.map((el) => (
                 <MenuItem key={el.name} value={el.name}>
@@ -78,7 +80,7 @@ export default class AddSubject extends Component {
               onChange={this.handleSemesterDropdownChange}
               input={<OutlinedInput label="Semester" />}
               // MenuProps={MenuProps}
-              style={{ width: 250 }}
+              style={{ width: 250, marginBottom: 10 }}
               disabled={this.state.disableSemDropdown}
             >
               {this.state.courseSemesterCount.map((el) => (
@@ -87,6 +89,18 @@ export default class AddSubject extends Component {
                 </MenuItem>
               ))}
             </Select>
+          </FormControl>
+          <FormControl fullWidth>
+            <TextField
+              required
+              id="outlined-required"
+              label="Subject Name"
+              placeholder="Enter the subject name"
+              style= {{marginBottom:10}}
+            />
+          </FormControl>
+          <FormControl fullwidth>
+          <Button variant="contained">Submit</Button>
           </FormControl>
         </Box>
       </>
