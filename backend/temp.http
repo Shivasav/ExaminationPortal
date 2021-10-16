@@ -14,3 +14,13 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/admin/getCourseDetails
+
+###
+POST http://localhost:5000/api/admin/addSubject
+Content-Type: application/json
+
+{
+    "courseID": 1,
+    "subjectName": "DM",
+    "semester": "5"
+}

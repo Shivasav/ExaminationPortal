@@ -18,6 +18,9 @@ export default class AddSubject extends Component {
     selectedSemester: "",
     disableSemDropdown: true,
     courseSemesterCount: [],
+    disableSubmit: true,
+    disableSubject: true,
+    subjectName: "",
   };
 
   componentDidMount() {
@@ -30,7 +33,13 @@ export default class AddSubject extends Component {
 
   handleCourseDropdownChange = (event) => {
     this.setState(
-      { selectedCourse: event.target.value, disableSemDropdown: false },
+      {
+        selectedCourse: event.target.value,
+        disableSemDropdown: false,
+        selectedCourseId: this.state.courses.filter((course) => {
+          return course.name === event.target.value;
+        })[0].id,
+      },
       () => {
         var semesterCount = this.state.courses.filter((el) => {
           return el.name === this.state.selectedCourse;
@@ -46,7 +55,33 @@ export default class AddSubject extends Component {
   };
 
   handleSemesterDropdownChange = (event) => {
-    this.setState({ selectedSemester: event.target.value });
+    this.setState({
+      selectedSemester: event.target.value,
+      disableSubject: false,
+    });
+  };
+
+  handleSubjectChange = (e) => {
+    this.setState({ subjectName: e.target.value, disableSubmit: false });
+  };
+
+  handleSubmit = () => {
+    console.log({
+      courseID: this.state.selectedCourseId,
+      subjectName: this.state.subjectName,
+      semseter: this.state.selectedSemester,
+    });
+
+    axios
+      .post("http://localhost:5000/api/admin/addSubject", {
+        courseID: this.state.selectedCourseId,
+        subjectName: this.state.subjectName,
+        semester: this.state.selectedSemester,
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        alert(resp.data.message);
+      });
   };
 
   render() {
@@ -62,10 +97,10 @@ export default class AddSubject extends Component {
               onChange={this.handleCourseDropdownChange}
               input={<OutlinedInput label="Course" />}
               // MenuProps={MenuProps}
-              style={{ width: 250, margin: 5 }}
+              style={{ width: 250, marginBottom: 10 }}
             >
               {this.state.courses.map((el) => (
-                <MenuItem key={el.name} value={el.name}>
+                <MenuItem key={el.id} value={el.name}>
                   {el.name}
                 </MenuItem>
               ))}
@@ -92,15 +127,23 @@ export default class AddSubject extends Component {
           </FormControl>
           <FormControl fullWidth>
             <TextField
-              required
               id="outlined-required"
               label="Subject Name"
               placeholder="Enter the subject name"
-              style= {{marginBottom:10}}
+              style={{ width: 350, marginBottom: 10 }}
+              disabled={this.state.disableSubject}
+              value={this.state.subjectName}
+              onChange={this.handleSubjectChange}
             />
           </FormControl>
           <FormControl fullwidth>
-          <Button variant="contained">Submit</Button>
+            <Button
+              variant="contained"
+              disabled={this.state.disableSubmit}
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </Button>
           </FormControl>
         </Box>
       </>

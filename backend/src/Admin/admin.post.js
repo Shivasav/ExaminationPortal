@@ -3,8 +3,8 @@ exports.post = async (req, res) => {
 
   res.contentType("application/json");
 
-  // if (inAction === "verifyLogin") {
-  //   var data = require("./routes/post-calls/verifyLogin.js");
-  //   data(req, res);
-  // }
+  if (inAction === "addSubject") {
+    var data = require("./routes/post-calls/addSubject.js");
+    data(req, res);
+  }
 };
