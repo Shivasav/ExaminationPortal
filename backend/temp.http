@@ -24,3 +24,19 @@ Content-Type: application/json
     "subjectName": "DM",
     "semester": "5"
 }
+
+###
+GET http://localhost:5000/api/admin/getSubjects?courseId=1&semester=2
+
+###
+POST http://localhost:5000/api/admin/createExam
+Content-Type: application/json
+
+{
+    "subjectId": 2,
+    "questionCount": 3,
+    "examDate": "2021-10-27T13:07"
+}
+
+###
+POST http://localhost:5000/api/admin/inviteUsers

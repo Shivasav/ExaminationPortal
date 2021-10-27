@@ -2,13 +2,18 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var mysql = require("mysql");
+const fileupload = require("express-fileupload");
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileupload());
+app.use(express.static("uploads"));
 
 app.use(cors());
+
+global.__basedir = __dirname;
 
 app.get("/", (req, res) => {
   res.send("Welcome to my app!");

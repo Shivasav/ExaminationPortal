@@ -6,5 +6,8 @@ exports.get = async (req, res) => {
   if (inAction === "getCourseDetails") {
     var data = require("./routes/get-calls/getCourseDetails.js");
     data(req, res);
+  } else if (inAction === "getSubjects") {
+    var data = require("./routes/get-calls/getSubjects.js");
+    data(req, res);
   }
 };
