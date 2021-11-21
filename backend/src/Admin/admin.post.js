@@ -15,5 +15,11 @@ exports.post = async (req, res) => {
   } else if (inAction === "inviteUsers") {
     var data = require("./routes/post-calls/inviteUsers.js");
     data(req, res);
+  } else if (inAction === "takeExam") {
+    var data = require("./routes/post-calls/takeExam.js");
+    data(req, res);
+  }else if(inAction === "submitExam"){
+    var data = require("./routes/post-calls/submitExam.js");
+    data(req,res);
   }
 };

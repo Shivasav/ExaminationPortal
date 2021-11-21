@@ -8,13 +8,17 @@ module.exports = async (req, res) => {
 
   //Fetch all questions for the subject
   connection.query(
-    "select id from questions where subjectId = ?",
+    "select id from questions where subjectId = ? and type='mcq'",
     [subjectId],
     function (err, result) {
       var ids = [];
       result.map((el) => {
         ids.push(el.id);
       });
+
+      if(count > ids.length){
+        return res.status(500).send({ status: "Failed!", message: "Not enough questions for this subject" });
+      }
       //Choose random set from this array
       var questionsToUse = _.sample(ids, count).join(",");
 

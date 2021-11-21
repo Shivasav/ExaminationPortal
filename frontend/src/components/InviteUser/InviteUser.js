@@ -24,6 +24,8 @@ export default class InviteUser extends Component {
     disableSubjectDropdown: true,
     selectedSubject: "",
     subjects: [],
+    exams: [],
+    disableExamDropdown: true,
   };
 
   componentDidMount() {
@@ -96,8 +98,22 @@ export default class InviteUser extends Component {
       selectedSubjectId: this.state.subjects.filter((subject) => {
         return subject.name === e.target.value;
       })[0].id,
+    }, () => {
+      axios.get("http://localhost:5000/api/admin/getExams?subjectId=" + this.state.selectedSubjectId)
+      .then((resp) => {
+        this.setState({exams: resp.data, disableExamDropdown: false})
+      })
     });
   };
+
+  handleExamDropdownChange = (e) => {
+    this.setState({
+      selectedExam: e.target.value,
+      selectedExamId: this.state.exams.filter((exam) => {
+        return exam.id === e.target.value;
+      })[0].id,
+    })
+  }
 
   handleFileUpload = (e) => {
     this.setState({ disableSubmit: false });
@@ -115,8 +131,8 @@ export default class InviteUser extends Component {
     data.append("file", this.state.selectedFiles[0]);
     axios
       .post(
-        "http://localhost:5000/api/admin/uploadFile?subjectId=" +
-          this.state.selectedSubjectId,
+        "http://localhost:5000/api/admin/inviteUsers?examId=" +
+          this.state.selectedExamId,
         data
       )
       .then((res) => {
@@ -203,6 +219,25 @@ export default class InviteUser extends Component {
                 {this.state.subjects.map((el) => (
                   <MenuItem key={el.id} value={el.name}>
                     {el.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="exam-dropdown">Exams</InputLabel>
+              <Select
+                labelId="exam-dropdown"
+                id="exam-dropdown"
+                value={this.state.selectedExam}
+                onChange={this.handleExamDropdownChange}
+                input={<OutlinedInput label="Exams" />}
+                // MenuProps={MenuProps}
+                style={{ width: 250, marginBottom: 10 }}
+                disabled={this.state.disableExamDropdown}
+              >
+                {this.state.exams.map((el) => (
+                  <MenuItem key={el.id} value={el.id}>
+                    Exam: {el.id} to be held on - {new Date(el.examDate).toDateString()}
                   </MenuItem>
                 ))}
               </Select>

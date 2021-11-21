@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   file.mv(`${newpath}${timestamp}_${filename}`, (err) => {
     if (err) {
       console.log(err);
-      res.status(500).send({ message: "File upload failed", code: 200 });
+      res.status(500).send({ message: "File upload failed", code: 500 });
     } else {
       const result = excelToJson({
         sourceFile: `${newpath}${timestamp}_${filename}`,
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
         "answer",
       ];
       if (!_.isEqual(Object.keys(result["Sheet1"][0]), keys)) {
-        resres.status(500).send({
+        res.status(500).send({
           status: "Failed",
           message: "File is not in the correct format!",
         });

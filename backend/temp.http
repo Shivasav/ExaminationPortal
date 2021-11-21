@@ -39,4 +39,19 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:5000/api/admin/getExams?subjectId=2
+
+###
 POST http://localhost:5000/api/admin/inviteUsers
+
+###
+POST http://localhost:5000/api/admin/takeExam
+Content-Type: application/json
+
+{
+    "invitationId": "fd61654d-0899-4928-86c1-96a4e4bb6e24",
+    "emailId": "brij.bhasin7@gmail.com"
+}
+
+###
+GET http://localhost:5000/api/admin/getResults?examId=1
