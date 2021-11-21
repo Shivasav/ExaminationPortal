@@ -108,7 +108,7 @@ function sendMail(email, name, subjectName, examDate, invitationId) {
   let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   sendSmtpEmail.subject = `${subjectName} exam scheduled for ${examDate}`;
-  sendSmtpEmail.htmlContent = `<html><body><h1>Hello ${name}, <br />You are scheduled for an exam for ${subjectName}</h1><h3>Click on the below link to begin your exam</h3></body></html>`;
+  sendSmtpEmail.htmlContent = `<html><body><h1>Hello ${name}, <br />You are scheduled for an exam for ${subjectName}</h1><h3>Click on the below link to begin your exam</h3><br /> <a href='http://localhost:5000/takeExam/${invitationId}' target='_blank'>Link to Exam</a> </body></html>`;
   sendSmtpEmail.sender = { name: "Examine", email: "info.examine@gmail.com" };
   sendSmtpEmail.to = [{ email: email, name: name }];
   sendSmtpEmail.replyTo = {
