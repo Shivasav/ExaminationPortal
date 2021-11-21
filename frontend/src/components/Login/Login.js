@@ -16,8 +16,6 @@ import IconButton from "@mui/material/IconButton";
 import { styles } from "./loginCss.js";
 import { AppContext } from "../../Context/AppContext.js";
 import Footer from "../Footer/Footer.js";
-import LoginHome from "../LoginHome/LoginHome.js";
-import zIndex from "@mui/material/styles/zIndex";
 import Home from "../Home/Home.js";
 
 class Login extends Component {
