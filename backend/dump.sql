@@ -53,7 +53,7 @@ CREATE TABLE `examinationmaster` (
   `questionIds` text,
   `examDate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +62,7 @@ CREATE TABLE `examinationmaster` (
 
 LOCK TABLES `examinationmaster` WRITE;
 /*!40000 ALTER TABLE `examinationmaster` DISABLE KEYS */;
+INSERT INTO `examinationmaster` VALUES (1,2,'2,4,3,6','2021-11-20 12:00:00');
 /*!40000 ALTER TABLE `examinationmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,8 +120,35 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,'what is 1+1','1','3','2','5','2','mcq',2),(2,'what is 1+4','1','3','2','5','5','mcq',2),(3,'explain what is java scipt','NA','NA','NA','NA','NA','subjective',2),(4,'explain Cs','NA','NA','NA','NA','NA','subjective',2),(5,'what is 1+2','1','3','2','5','3','mcq',2),(6,'what is 1+3','4','3','2','5','2','mcq',2);
+INSERT INTO `questions` VALUES (1,'what is 1+1','1','3','2','5','2','mcq',2),(2,'what is 1+4','1','3','2','5','4','mcq',2),(3,'explain what is java scipt','NA','NA','NA','NA','1','subjective',2),(4,'explain Cs','NA','NA','NA','NA','1','subjective',2),(5,'what is 1+2','1','3','2','5','3','mcq',2),(6,'what is 1+3','4','3','2','5','2','mcq',2);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `results`
+--
+
+DROP TABLE IF EXISTS `results`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `results` (
+  `id` varchar(1000) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `examId` int DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `score` varchar(100) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `results`
+--
+
+LOCK TABLES `results` WRITE;
+/*!40000 ALTER TABLE `results` DISABLE KEYS */;
+INSERT INTO `results` VALUES ('fd61654d-0899-4928-86c1-96a4e4bb6e24','brij.bhasin7@gmail.com',1,2,'3','Brij Mohan Bhasin'),('36f0e3a4-ed04-44e1-a7f7-95cba4cd65d0','shivasavbhasin@gmail.com',1,1,'NA','Shivasav Bhasin');
+/*!40000 ALTER TABLE `results` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -160,4 +188,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-27 22:31:44
+-- Dump completed on 2021-11-21 16:41:46
