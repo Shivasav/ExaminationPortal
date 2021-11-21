@@ -1,6 +1,5 @@
 import { React } from "react";
-import { Card, CardMedia } from "@mui/material";
-import Banner from "../../assets/images/banner.jpeg";
+import { Card } from "@mui/material";
 import Particles from "react-tsparticles";
 
 export default function LoginHome() {

@@ -8,28 +8,28 @@ const Timer = ({hoursMinSecs,stopper}) => {
     const [isActive, setIsActive] = useState(true);
     const history = useHistory();
 
-    const tick = () => {
-   
-        if (hrs === 0 && mins === 0 && secs === 0){
-            history.replace("/thankyou");
-        } 
-        else if (mins === 0 && secs === 0) {
-            setTime([hrs - 1, 59, 59]);
-            sessionStorage.setItem("timer", JSON.stringify({hours: hrs-1, minutes: 59, seconds: 59}))
-        } else if (secs === 0) {
-            setTime([hrs, mins - 1, 59]);
-            sessionStorage.setItem("timer", JSON.stringify({hours: hrs, minutes: mins-1, seconds: 59}))
-        } else {
-            setTime([hrs, mins, secs - 1]);
-            sessionStorage.setItem("timer", JSON.stringify({hours: hrs, minutes: mins, seconds: secs -1}))
-        }
-    };
-
-
-    const reset = () => setTime([parseInt(hours), parseInt(minutes), parseInt(seconds)]);
 
     
     React.useEffect(() => {
+        const reset = () => setTime([parseInt(hours), parseInt(minutes), parseInt(seconds)]);
+
+        const tick = () => {
+   
+            if (hrs === 0 && mins === 0 && secs === 0){
+                history.replace("/thankyou");
+            } 
+            else if (mins === 0 && secs === 0) {
+                setTime([hrs - 1, 59, 59]);
+                sessionStorage.setItem("timer", JSON.stringify({hours: hrs-1, minutes: 59, seconds: 59}))
+            } else if (secs === 0) {
+                setTime([hrs, mins - 1, 59]);
+                sessionStorage.setItem("timer", JSON.stringify({hours: hrs, minutes: mins-1, seconds: 59}))
+            } else {
+                setTime([hrs, mins, secs - 1]);
+                sessionStorage.setItem("timer", JSON.stringify({hours: hrs, minutes: mins, seconds: secs -1}))
+            }
+        };
+
         let timerId=null;
         if(isActive){
              timerId = setInterval(() => tick(), 1000);
@@ -44,7 +44,7 @@ const Timer = ({hoursMinSecs,stopper}) => {
          }
          
         return () => clearInterval(timerId);
-    });
+    }, [history, hours,hrs, isActive, mins, minutes, seconds, secs, stopper]);
 
     
     return (
