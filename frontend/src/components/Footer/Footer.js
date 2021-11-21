@@ -3,7 +3,7 @@ import { AppBar, Button, Box } from "@mui/material";
 
 export default function Footer() {
   return (
-    <AppBar position="static">
+    <AppBar position="static"  style={{zIndex: 1, position: "relative", bottom: 0}}>
       <Box display="flex" justifyContent="center" alignItems="center">
         <div>
           <Button

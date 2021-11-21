@@ -1,6 +1,8 @@
 import {
   Box,
   Button,
+  Card,
+  CardMedia,
   FormControl,
   Grid,
   InputLabel,
@@ -13,6 +15,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { React, Component } from "react";
+import Taxonomy from "../../assets/images/taxonomy.jpeg";
 
 export default class CreateExam extends Component {
   state = {
@@ -234,6 +237,12 @@ export default class CreateExam extends Component {
                 Setup Exam
               </Button>
             </FormControl>
+          </Paper>
+        </Box>
+
+        <Box sx={{ minWidth: 120 }}>
+          <Paper variant="outlined" elevation={3} style={{ padding: 10 }}>
+          <img src={Taxonomy} width={750} height={500} alt="taxonomy"/>
           </Paper>
         </Box>
       </>

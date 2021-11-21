@@ -16,7 +16,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 // import { AppContext } from "../../Context/AppContext";
 import CreateExam from "../CreateExam/CreateExam";
-import Home from "../Home/Home";
 import AddQuestionSet from "../AddQuestionSet/AddQuestionSet";
 import AddSubject from "../AddSubject/AddSubject";
 import InviteUser from "../InviteUser/InviteUser";
@@ -30,7 +29,7 @@ function NavBar(props) {
   //   const context = React.useContext(AppContext);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [view, setView] = React.useState("Home");
+  const [view, setView] = React.useState("About");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -71,7 +70,6 @@ function NavBar(props) {
       <Divider />
       <List>
         {[
-          "Home",
           "Create Exam",
           "Add Question Set",
           "Add Subjects",
@@ -170,7 +168,6 @@ function NavBar(props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         {view === "Create Exam" && <CreateExam />}
-        {view === "Home" && <Home />}
         {view === "Add Question Set" && <AddQuestionSet />}
         {view === "Add Subjects" && <AddSubject />}
         {view === "Invite Users" && <InviteUser />}

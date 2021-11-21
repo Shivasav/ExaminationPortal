@@ -17,6 +17,8 @@ import { styles } from "./loginCss.js";
 import { AppContext } from "../../Context/AppContext.js";
 import Footer from "../Footer/Footer.js";
 import LoginHome from "../LoginHome/LoginHome.js";
+import zIndex from "@mui/material/styles/zIndex";
+import Home from "../Home/Home.js";
 
 class Login extends Component {
   state = {
@@ -68,7 +70,7 @@ class Login extends Component {
   render() {
     return (
       <>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} style={{zIndex: 1, position: "relative"}}>
           <AppBar position="static">
             <Toolbar>
               <IconButton
@@ -96,7 +98,7 @@ class Login extends Component {
         >
           <Box sx={styles.modal}>
             <Grid container spacing={2}>
-              <Typography variant="h4" style={{ width: "100%" }}>
+              <Typography variant="h4" style={{ width: "100%", color: "black" }}>
                 Sign In
               </Typography>
               <Divider />
@@ -148,7 +150,8 @@ class Login extends Component {
           </Box>
         </Modal>
 
-        <LoginHome />
+        {/* <LoginHome /> */}
+        <Home />
 
         <Footer />
       </>

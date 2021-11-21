@@ -13,14 +13,14 @@ module.exports = async (req, res) => {
   const timestamp = +new Date();
   const excelToJson = require("convert-excel-to-json");
   var _ = require("underscore");
-  const { v4 : uuidv4 } = require('uuid');
+  const { v4: uuidv4 } = require("uuid");
   var connection = require("../../../../index.js");
 
   var data = [];
   var examId = req.query.examId;
   var subjectName = "";
   var examDate = "";
-  console.log(examId)
+  console.log(examId);
 
   connection.query(
     "select subjectid, examDate from examinationmaster where id=?",
@@ -61,27 +61,36 @@ module.exports = async (req, res) => {
               } else {
                 //Get Excel Data
                 result["Sheet1"].map((row) => {
-
                   //Create Invitation IDs for exam for each user
-                  var sql = "insert into results(id, email, name examid, status, score) values (?,?,?,?,?)";
+                  var sql =
+                    "insert into results(id, email, name examid, status, score) values (?,?,?,?,?)";
                   var invitationId = uuidv4();
-                  connection.query(sql,[invitationId, row.email, row.name, examId, 1, "NA"], function(err2, result2){
-                      if(!err2){
+                  connection.query(
+                    sql,
+                    [invitationId, row.email, row.name, examId, 1, "NA"],
+                    function (err2, result2) {
+                      if (!err2) {
                         //Send Mail
                         //sendMail(row.email, row.name, subjectName, examDate, invitationId);
-                        
-                      }else{
-                        console.log(err2)
-                        res.status(500).send({status: "Failed", message: "Could not invite users! Please check logs!"})
+                      } else {
+                        console.log(err2);
+                        res
+                          .status(500)
+                          .send({
+                            status: "Failed",
+                            message:
+                              "Could not invite users! Please check logs!",
+                          });
                       }
-                  })
+                    }
+                  );
                 });
               }
             }
           });
         }
       );
-      res.send({status: "Success", message: "Invitations sent!"})
+      res.send({ status: "Success", message: "Invitations sent!" });
     }
   );
 };

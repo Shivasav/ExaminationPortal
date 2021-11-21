@@ -4,7 +4,6 @@ import Login from "./components/Login/Login";
 import { Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./Context/ProtectedRoute";
 import NavBar from "./components/NavBar/NavBar";
-import TakeExam from "./components/TakeExam/TakeExam";
 import TakeExamContainer from "./components/TakeExam/TakeExamContainer";
 import ThankYou from "./components/TakeExam/ThankYou";
 
